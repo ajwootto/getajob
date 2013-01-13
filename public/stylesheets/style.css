@@ -1,0 +1,22 @@
+@import url("http://fonts.googleapis.com/css?family=Monda:400,700");
+#sidebar{position:fixed;top:0;right:0;font-size:1.5em;background:rgba(0,0,0,0.5);width:175px;}
+#sidebar a{-webkit-box-shadow:-1px 0 #333;box-shadow:-1px 0 #333;display:block;float:right;width:150px;padding:6px 0 6px 25px;margin-bottom:4px;-webkit-border-top-left-radius:3px;border-top-left-radius:3px;-webkit-border-bottom-left-radius:3px;border-bottom-left-radius:3px;border-left:4px solid #9f3d3d;text-decoration:none;background:#000;color:#9f3d3d;text-shadow:0 0 3px #000}
+#sidebar a:hover{width:175px;color:#d42626;border-left:4px solid #d42626}
+#sidebar a:active{color:#ea5a5a;border-left:4px solid #ea5a5a}
+#sidebar a#register-link{color:#d47526;margin-bottom:0;border-left:4px solid #d47526}
+#sidebar a#register-link:hover{color:#ea9b5a;border-left:4px solid #ea9b5a}
+#sidebar a#register-link:active{color:#eab080;border-left:4px solid #eab080}
+#sidebar img{float:right;margin-top:5px;margin-bottom:10px;margin-right:37.5px}
+#footer{position:fixed;center:0;bottom:0;background:rgba(0,0,0,0.9);color:#fff;text-align:center;height:50px;width:100%}
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-weight:inherit;font-style:inherit;font-family:inherit;font-size:100%;vertical-align:baseline}
+body{line-height:1;color:#000;background:#fff}
+ol,ul{list-style:none}
+table{border-collapse:separate;border-spacing:0;vertical-align:middle}
+caption,th,td{text-align:left;font-weight:normal;vertical-align:middle}
+a img{border:none}
+body{font-family:'Monda',sans;font-size:90%;font-weight:400}
+img.bg{min-height:100%;min-width:512px;width:100%;height:auto;position:fixed;top:0;left:0;z-index:-1}
+@media screen and (max-width: 512px){img.bg{left:50%;margin-left:-256px}
+}#header{margin:15px auto 5px auto;vertical-align:bottom;padding:5px;width:900px;text-align:center;color:#9f3d3d;background:rgba(0,0,0,0.7);-webkit-border-radius:10px;border-radius:10px;font-size:4em;font-weight:bold;text-shadow:0 0 5px #000}
+#header.registration{color:#d47526}
+#content-body{width:900px;margin:10px auto;min-height:500px;background:rgba(0,0,0,0.7);-webkit-border-radius:20px;border-radius:20px;padding:10px;color:#fff}
