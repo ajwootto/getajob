@@ -4,12 +4,5 @@ html
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
-    img.bg(src="../images/field2.jpg")
-    block sidebar
-    -if (typeof registration != "undefined" && registration)
-      h1#header.registration= currenttab
-    -else
-      h1#header= currenttab
-    #content-body
-      block content
+    block content
     block footer
