@@ -1,10 +1,73 @@
 @import 'nib';
-@import url(http://fonts.googleapis.com/css?family=Monda:400,700);
-@import 'colors.styl';
-@import 'sidebar.styl';
-@import 'footer.styl';
 
 global-reset();
-
-
+a
+  text-decoration: none
+  color: black
 @import 'index.styl';
+
+@font-face
+  font-family Segoe
+  font-style normal
+  src url(../fonts/segoeui.ttf)
+body
+  width: 100%
+  height: 900px
+  background-image:url(/images/grey.png)
+
+html *
+  font-family Segoe
+h1
+  font-size: 4em
+
+#namehelper
+  position: absolute
+  top:4em
+  left:24.5em
+  font-size: 0.8em
+
+#nameheader
+  margin: 4em
+
+#title-subtext
+  margin: 0.5em 0 0 2em
+  opacity: 0.7
+
+#sidebar
+  margin: 5em 0 0 2em
+  line-height:2em
+  font-size: 1em
+  opacity: 0.8
+  display: inline-block
+
+#sidebar a:hover
+  font-size:1.2em
+  line-height:1em
+  opacity: 1
+
+#content
+  width: 80%
+  min-height: 50%
+  position: absolute
+  top: 12em
+  left: 10em
+
+#imageGrid img
+  position:absolute
+  top:0
+  bottom: 0
+  left: 0
+  right: 0
+  width:300px
+  height:200px
+#imageGrid img:hover
+  width:310px
+  height:210px
+  top: -5px
+  left: -5px
+
+.imageContainer
+  width:310px
+  height:210px
+  position:relative
+  display: inline-block

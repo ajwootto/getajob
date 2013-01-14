@@ -1,0 +1,24 @@
+block sidebar
+	#sidebar
+		a(href="#")#work Work Projects <br/>
+		a(href="#")#side Side Projects <br/>
+		a(href="#")#school School <br/>
+		a(href="#")#life Life <br />
+		a(href="#")#contact Contact <br />
+		a(href="#")#resume Resume
+script 
+	$('#sidebar').find("a").each(function() {
+		$(this).bind('click', function(e) {
+			e.preventDefault();
+			$.ajax({
+				url: '/nav',
+				type: 'POST',
+				data: {link: $(this).attr('id')},
+				success: function(a,b) {
+					$("#content").html(a);
+				}
+			})
+		})
+	});
+	$("#work").trigger('click');
+
