@@ -7,6 +7,33 @@ block sidebar
 		a(href="#")#contact Contact <br />
 		a(href="#")#resume Resume
 script 
+	var imageAjax = function (img) {
+		$.ajax({
+				url: '/info',
+				type: 'POST',
+				data: {name: $(img).parent().attr('id')},
+				success: function(a,b) {
+					$("#imageInfo").html(a);
+				}
+			})
+	}
+	var bindImages = function() {
+		$("img").each(function() {
+			var that = this
+			$(this).bind('click', function() {
+				console.log('clicked')
+				if ($(that).hasClass('active')) {
+					$(that).removeClass('active');
+					$("#clickoff").removeClass('clickActive');
+				}
+				else {
+					$(that).addClass('active');
+					$("#clickoff").addClass('clickActive');
+					imageAjax(that);
+				}
+			})
+		})
+	};
 	$('#sidebar').find("a").each(function() {
 		$(this).bind('click', function(e) {
 			e.preventDefault();
@@ -16,9 +43,11 @@ script
 				data: {link: $(this).attr('id')},
 				success: function(a,b) {
 					$("#content").html(a);
+					bindImages();
 				}
 			})
 		})
 	});
 	$("#work").trigger('click');
-
+	
+	
