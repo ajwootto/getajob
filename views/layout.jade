@@ -10,9 +10,5 @@ html
     block content
 script
   $("#clickoff").bind('click', function() {
-    $("#imageGrid").find("img").each(function () {
-      console.log('ahh')
-      $(this).removeClass("active");
-      $("#clickoff").removeClass("clickActive");
-    })
+    dontZoom();
   });

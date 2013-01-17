@@ -1,0 +1,37 @@
+#zoomContainer
+	display: none
+	position: absolute
+	left: 10%
+	padding-left: 450px
+	top: 0
+	opacity: 0
+	z-index: 500
+	transition: top 0.7s ease, opacity 0.7s ease
+#zoomContainer.animation
+	top: 5em
+	opacity: 1
+#zoomHeader
+	font-size: 7em
+	z-index: 1000
+	padding-left: 2.5em
+	margin: 0 0 0.5em 0 
+	color:white
+
+#zoomContent
+	color: white
+	width: 550px
+	display: inline-block
+	z-index: 1000
+	font-weight: normal
+.imageContainer.active
+	position: static !important
+#imageGrid img.active
+	transition: left 0.7s ease
+	width: 400px
+	height: 250px
+	position: fixed
+	left: 10%
+	top: 100px
+	z-index: 500
+.visible
+	display: inline-block !important

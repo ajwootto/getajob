@@ -13,9 +13,31 @@ script
 				type: 'POST',
 				data: {name: $(img).parent().attr('id')},
 				success: function(a,b) {
-					$("#imageInfo").html(a);
+					$("#zoomContainer").html(a);
+					$("#zoomContainer").addClass("animation");
 				}
 			})
+	}
+	var doZoom = function(that) {
+		$(that).addClass('active');
+		$('.imageContainer').each(function () {
+			if ($(this).attr('id') == $(that).parent().attr('id'))
+				$(this).addClass('active');
+		});
+		$("#clickoff").addClass('clickActive');
+		$("#zoomContainer").addClass('visible');
+		imageAjax(that);
+	}
+	var dontZoom = function() {
+		$("#imageGrid").find("img").each(function() {
+			$(this).removeClass('active');
+		})
+		$('.imageContainer').each(function () {
+			$(this).removeClass('active');
+		});
+		$("#zoomContainer").removeClass('visible');
+		$("#zoomContainer").removeClass("animation");
+		$("#clickoff").removeClass('clickActive');
 	}
 	var bindImages = function() {
 		$("img").each(function() {
@@ -23,13 +45,10 @@ script
 			$(this).bind('click', function() {
 				console.log('clicked')
 				if ($(that).hasClass('active')) {
-					$(that).removeClass('active');
-					$("#clickoff").removeClass('clickActive');
+					dontZoom()
 				}
 				else {
-					$(that).addClass('active');
-					$("#clickoff").addClass('clickActive');
-					imageAjax(that);
+					doZoom(that)
 				}
 			})
 		})
