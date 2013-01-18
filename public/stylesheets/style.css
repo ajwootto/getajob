@@ -6,7 +6,7 @@ caption,th,td{text-align:left;font-weight:normal;vertical-align:middle}
 a img{border:none}
 a{text-decoration:none;color:#000}
 @font-face{font-family:Segoe;font-style:normal;src:url("../fonts/segoeui.ttf")}
-body{width:100%;height:900px;background-image:url("/images/grey.png")}
+body{width:100%;background-image:url("/images/grey.png")}
 html *{font-family:Segoe}
 h1{font-size:4em}
 #namehelper{position:absolute;top:4em;left:24.5em;font-size:.8em}
@@ -19,12 +19,12 @@ h1{font-size:4em}
 #imageGrid img:hover{width:310px;height:210px;top:-5px;left:-5px}
 .imageContainer{width:310px;height:210px;position:relative;display:inline-block}
 .clickActive{display:block !important}
-#clickoff{width:100%;height:100%;background-color:#000;opacity:.9;filter:alpha(opacity=90);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";z-index:499;position:absolute;top:0;left:0;display:none}
+#clickoff{background-color:#000;opacity:.9;filter:alpha(opacity=90);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";z-index:499;position:absolute;top:0;left:0;right:0;bottom:0;display:none}
 ul{list-style:circle !important}
 #zoomContainer{display:none;position:absolute;left:10%;padding-left:450px;top:0;opacity:0;filter:alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";z-index:500;-webkit-transition:top .7s ease, opacity .7s ease;-moz-transition:top .7s ease, opacity .7s ease;-o-transition:top .7s ease, opacity .7s ease;-ms-transition:top .7s ease, opacity .7s ease;transition:top .7s ease,opacity .7s ease}
 #zoomContainer.animation{top:5em;opacity:1;-ms-filter:none;filter:none}
-#zoomHeader{font-size:7em;z-index:1000;padding-left:2.5em;margin:0 0 .5em 0;color:#fff}
+#zoomHeader{font-size:7em;z-index:1000;margin:0 0 .5em 0;color:#fff;white-space:nowrap}
 #zoomContent{color:#fff;width:550px;display:inline-block;z-index:1000;font-weight:normal}
 .imageContainer.active{position:static !important}
-#imageGrid img.active{-webkit-transition:left .7s ease;-moz-transition:left .7s ease;-o-transition:left .7s ease;-ms-transition:left .7s ease;transition:left .7s ease;width:400px;height:250px;position:fixed;left:10%;top:100px;z-index:500}
+#imageGrid img.active{-webkit-transition:left .7s ease;-moz-transition:left .7s ease;-o-transition:left .7s ease;-ms-transition:left .7s ease;transition:left .7s ease;width:400px;height:250px;position:absolute;left:-6em;top:-5em;z-index:500}
 .visible{display:inline-block !important}
