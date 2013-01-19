@@ -4,10 +4,10 @@
  */
 
 exports.index = function(req, res){
-  res.render('index', { title: 'Adam Wootton'});
+	res.render('index', { title: 'Adam Wootton'});
 };
 exports.nav = function(req, res){
-	res.render(req.body.link)
+	res.render(req.body.link);
 }
 exports.info = function(req, res) {
 	res.render('zoom/' + req.body.name)

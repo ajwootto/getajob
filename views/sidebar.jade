@@ -57,19 +57,24 @@ script
 		$(this).bind('click', function(e) {
 			var that = e.target
 			e.preventDefault();
-			$.ajax({
-				url: '/nav',
-				type: 'POST',
-				data: {link: $(this).attr('id')},
-				success: function(a,b) {
-					$('#sidebar').find("a").each(function() {
-						$(this).removeClass("active");
-					});
-					$(that).addClass("active");
-					$("#content").html(a);
-					bindImages();
-				}
-			})
+			if ($(this).attr('id') == "resume") {
+				window.location.href = 'resume.html'
+			} else {
+				$.ajax({
+					url: '/nav',
+					type: 'POST',
+					data: {link: $(this).attr('id')},
+					success: function(a,b) {
+						$('#sidebar').find("a").each(function() {
+							$(this).removeClass("active");
+						});
+						$(that).addClass("active");
+						$("#content").html(a);
+						bindImages();
+					}
+				})
+			}
+			
 		})
 	});
 	$("#work").trigger('click');
