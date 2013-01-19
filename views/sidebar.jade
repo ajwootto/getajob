@@ -1,6 +1,7 @@
 block sidebar
 	#sidebar
 		a(href="#")#work Work Projects <br/>
+		a(href="#")#jobs Past Jobs <br/>
 		a(href="#")#side Hobby/School<br/>
 		a(href="#")#life Life <br />
 		a(href="#")#contact Contact <br />
@@ -39,7 +40,7 @@ script
 		$("#clickoff").removeClass('clickActive');
 	}
 	var bindImages = function() {
-		$("img").each(function() {
+		$("img").not(".disabled").each(function() {
 			var that = this
 			$(this).bind('click', function() {
 				console.log('clicked')
