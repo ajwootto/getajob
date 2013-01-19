@@ -8,16 +8,18 @@ a{text-decoration:none;color:#000}
 @font-face{font-family:Segoe;font-style:normal;src:url("../fonts/segoeui.ttf")}
 body{width:100%;background-image:url("/images/grey.png")}
 html *{font-family:Segoe}
-h1{font-size:4em}
+h1{font-size:4em;white-space:nowrap}
 #namehelper{position:absolute;top:4em;left:24.5em;font-size:.8em}
 #nameheader{margin:4em}
 #title-subtext{margin:.5em 0 0 2em;opacity:.7;filter:alpha(opacity=70);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=70)"}
 #sidebar{margin:5em 0 0 2em;line-height:2em;font-size:1em;opacity:.8;filter:alpha(opacity=80);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";display:inline-block}
+#sidebar a.active{font-size:1.2em;line-height:1em;opacity:1;-ms-filter:none;filter:none}
 #sidebar a:hover{font-size:1.2em;line-height:1em;opacity:1;-ms-filter:none;filter:none}
-#content{width:80%;min-height:50%;position:absolute;top:12em;left:10em}
+#content{width:80%;min-height:50%;position:absolute;top:12em;left:11em}
 #imageGrid img{position:absolute;top:0;bottom:0;left:0;right:0;width:300px;height:200px}
 #imageGrid img:hover{width:310px;height:210px;top:-5px;left:-5px}
 .imageContainer{width:310px;height:210px;position:relative;display:inline-block}
+.imageContainer .infoTip{position:absolute;bottom:0;left:0;bottom:10px;padding:0 10px;color:#fff;background-color:rgba(0,0,0,0.6);line-height:2em}
 .clickActive{display:block !important}
 #clickoff{background-color:#000;opacity:.9;filter:alpha(opacity=90);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";z-index:499;position:absolute;top:0;left:0;right:0;bottom:0;display:none}
 ul{list-style:circle !important}

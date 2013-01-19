@@ -1,8 +1,7 @@
 block sidebar
 	#sidebar
 		a(href="#")#work Work Projects <br/>
-		a(href="#")#side Side Projects <br/>
-		a(href="#")#school School <br/>
+		a(href="#")#side Hobby/School<br/>
 		a(href="#")#life Life <br />
 		a(href="#")#contact Contact <br />
 		a(href="#")#resume Resume
@@ -55,12 +54,17 @@ script
 	};
 	$('#sidebar').find("a").each(function() {
 		$(this).bind('click', function(e) {
+			var that = e.target
 			e.preventDefault();
 			$.ajax({
 				url: '/nav',
 				type: 'POST',
 				data: {link: $(this).attr('id')},
 				success: function(a,b) {
+					$('#sidebar').find("a").each(function() {
+						$(this).removeClass("active");
+					});
+					$(that).addClass("active");
 					$("#content").html(a);
 					bindImages();
 				}
