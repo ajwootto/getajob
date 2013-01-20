@@ -42,6 +42,7 @@ app.get('/', routes.index);
 app.post('/nav', routes.nav);
 app.post('/info', routes.info);
 app.get('/pebble', routes.pebble);
+app.get("/capcom", routes.capcom);
 
 
 http.createServer(app).listen(app.get('port'), function(){

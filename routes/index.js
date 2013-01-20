@@ -15,3 +15,6 @@ exports.info = function(req, res) {
 exports.pebble = function(req, res) {
 	res.render("index", {employer: "pebble"})
 }
+exports.capcom = function(req, res) {
+	res.render("index", {employer: "capcom"})
+}
