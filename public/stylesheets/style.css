@@ -12,7 +12,7 @@ h1{font-size:4em;white-space:nowrap}
 #namehelper{position:absolute;top:4em;left:24.5em;font-size:.8em}
 #nameheader{margin:4em}
 #title-subtext{margin:.5em 0 0 2em;opacity:.7;filter:alpha(opacity=70);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=70)"}
-#sidebar{margin:5em 0 0 2em;line-height:2em;font-size:1em;opacity:.8;filter:alpha(opacity=80);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";display:inline-block}
+#sidebar{margin:5em 0 0 2em;line-height:2em;font-size:1em;opacity:.8;filter:alpha(opacity=80);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";display:inline-block;position:fixed}
 #sidebar a.active{font-size:1.2em;line-height:1em;opacity:1;-ms-filter:none;filter:none}
 #sidebar a:hover{font-size:1.2em;line-height:1em;opacity:1;-ms-filter:none;filter:none}
 #content{width:80%;min-height:50%;position:absolute;top:12em;left:11em}

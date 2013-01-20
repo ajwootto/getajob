@@ -29,7 +29,7 @@
 			}
 			body {
 				text-align: left;
-				font-family: "Calibri";
+				font-family: "Trebuchet MS";
 				
 			}
 			#body{
@@ -39,22 +39,24 @@
 
 			}
 			#software{
-				width: 80%;
+				width: 100%;
 				padding: 2px;
 				margin: 0 auto;
 				text-align: center;
 			}
-			#software .category {
-				display: inline-block;
+			#software #boxTitle{
 				font-weight: bold;
-				padding: 3px;
+				font-size: 1.2em;
+				margin-bottom: 0.3em;
+			}
+			#software .category {
+				display: block;
+				font-weight: bold;
 				background-color: #FFFFFF;
 			}
 			#software .category .item {
-				border: 1px solid black;
 				font-weight: normal;
 				display: inline-block;
-				margin: 2px;
 				padding: 2px;
 				background-color: #FFFFFF;
 			}
@@ -97,7 +99,8 @@
 		<h1>Adam Wootton</h1>
 		<h3>Skills Summary</h3>
 		<div id="software">
-			<div class="category">Hardware
+			<div id="boxTitle">Technologies</div>
+			<div class="category">Hardware:
 				<div class="item">Verilog/FPGAs</div>
 				<div class="item">BASIC</div>
 				<div class="item">Multimeters/Oscilloscopes</div>
@@ -105,18 +108,18 @@
 				<div class="item">Digital Debugging</div>
 				<div class="item">Soldering</div>
 			</div>
-			<div class="category">Scripting
+			<div class="category">Scripting:
 				<div class="item">Python</div>
 				<div class="item">LUA</div>
 				<div class="item">VBA</div>
 			</div>
-			<div class="category">OOP
+			<div class="category">OOP:
 				<div class="item">Android Java</div>
 				<div class="item">C++</div>
 				<div class="item">Actionscript</div>
 			</div>
 
-			<div class='category'>Web
+			<div class='category'>Web:
 				<div class="item">Javascript/HTML/CSS</div>
 				<div class="item">Backbone.js</div>
 				<div class="item">jQuery</div>
@@ -125,7 +128,7 @@
 				<div class="item">PHP</div>
 			</div>
 			
-			<div class="category">Git
+			<div class="category">Version Control:
 				<div class="item">Git</div>
 			</div>	
 			
