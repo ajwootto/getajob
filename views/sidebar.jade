@@ -44,8 +44,6 @@ script
 		$("img").not(".disabled").each(function() {
 			var that = this
 			$(this).bind('click', function() {
-				console.log('clicked')
-				window.scrollTo(0, 0);
 				$("#clickoff").css("width", $(document).width());
 				$("#clickoff").css("height", $(document).height());
 				if ($(that).hasClass('active')) {

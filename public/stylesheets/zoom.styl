@@ -1,8 +1,7 @@
 #zoomContainer
 	display: none
-	position: absolute
+	position: fixed
 	left: 10%
-	padding-left: 450px
 	top: 0
 	opacity: 0
 	z-index: 500
@@ -11,27 +10,44 @@
 	top: 5em
 	opacity: 1
 #zoomHeader
-	font-size: 7em
 	z-index: 1000
-	//padding-left: 2.5em
 	margin: 0 0 0.5em 0 
 	color:white
-	whitespace: nowrap
 #zoomContent
 	color: white
-	width: 550px
 	display: inline-block
 	z-index: 1000
 	font-weight: normal
 .imageContainer.active
 	position: static !important
-#imageGrid img.active
-	transition: left 0.7s ease
-	width: 400px
-	height: 250px
-	position: absolute
-	left: -6em
-	top: -5em
-	z-index: 500
+@media all and (max-width: 1100px)
+	#imageGrid img.active
+		width: 300px
+		height: 200px
+		position: fixed
+		left: 2em
+		top: 2em
+		z-index: 500
+	#zoomHeader
+		font-size: 5em
+	#zoomContainer
+		padding-left: 300px
+	#zoomContent
+		width: 300px
+@media all and (min-width: 1101px)
+	#imageGrid img.active
+		transition: left 0.7s ease
+		width: 400px
+		height: 250px
+		position: fixed
+		left: 4em
+		top: 4em
+		z-index: 500
+	#zoomHeader
+		font-size: 7em
+	#zoomContainer
+		padding-left: 450px
+	#zoomContent
+		width: 550px
 .visible
 	display: inline-block !important

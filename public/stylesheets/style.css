@@ -27,10 +27,17 @@ ul{list-style:circle !important}
 #employerBlurb{display:inline-block;width:60%;min-height:300px;color:#1c1c1c;opacity:.8;filter:alpha(opacity=80);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";text-shadow:.5px .5px .5px #2c2c2c}
 #employerTag{display:inline-block;position:relative;top:0;right:0;font-size:1.2em;float:right}
 #employerTag img{height:200px;width:300px}
-#zoomContainer{display:none;position:absolute;left:10%;padding-left:450px;top:0;opacity:0;filter:alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";z-index:500;-webkit-transition:top .7s ease, opacity .7s ease;-moz-transition:top .7s ease, opacity .7s ease;-o-transition:top .7s ease, opacity .7s ease;-ms-transition:top .7s ease, opacity .7s ease;transition:top .7s ease,opacity .7s ease}
+#zoomContainer{display:none;position:fixed;left:10%;top:0;opacity:0;filter:alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";z-index:500;-webkit-transition:top .7s ease, opacity .7s ease;-moz-transition:top .7s ease, opacity .7s ease;-o-transition:top .7s ease, opacity .7s ease;-ms-transition:top .7s ease, opacity .7s ease;transition:top .7s ease,opacity .7s ease}
 #zoomContainer.animation{top:5em;opacity:1;-ms-filter:none;filter:none}
-#zoomHeader{font-size:7em;z-index:1000;margin:0 0 .5em 0;color:#fff;white-space:nowrap}
-#zoomContent{color:#fff;width:550px;display:inline-block;z-index:1000;font-weight:normal}
+#zoomHeader{z-index:1000;margin:0 0 .5em 0;color:#fff}
+#zoomContent{color:#fff;display:inline-block;z-index:1000;font-weight:normal}
 .imageContainer.active{position:static !important}
-#imageGrid img.active{-webkit-transition:left .7s ease;-moz-transition:left .7s ease;-o-transition:left .7s ease;-ms-transition:left .7s ease;transition:left .7s ease;width:400px;height:250px;position:absolute;left:-6em;top:-5em;z-index:500}
-.visible{display:inline-block !important}
+@media all and (max-width: 1100px){#imageGrid img.active{width:300px;height:200px;position:fixed;left:2em;top:2em;z-index:500}
+#zoomHeader{font-size:5em}
+#zoomContainer{padding-left:300px}
+#zoomContent{width:300px}
+}@media all and (min-width: 1101px){#imageGrid img.active{-webkit-transition:left .7s ease;-moz-transition:left .7s ease;-o-transition:left .7s ease;-ms-transition:left .7s ease;transition:left .7s ease;width:400px;height:250px;position:fixed;left:4em;top:4em;z-index:500}
+#zoomHeader{font-size:7em}
+#zoomContainer{padding-left:450px}
+#zoomContent{width:550px}
+}.visible{display:inline-block !important}

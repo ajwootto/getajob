@@ -8,12 +8,12 @@ html
     include header
     include sidebar
     block content
+
 script
   $("#clickoff").bind('click', function() {
     dontZoom();
   });
   $(window).resize(function() {
-    console.log('resize')
     $("#clickoff").css("width", $(document).width());
     $("#clickoff").css("height", $(document).height());
   });
