@@ -39,8 +39,9 @@ app.configure('development', function(){
 });
 
 app.get('/', routes.index);
-app.post('/nav', routes.nav)
+app.post('/nav', routes.nav);
 app.post('/info', routes.info);
+app.get('/pebble', routes.pebble);
 
 
 http.createServer(app).listen(app.get('port'), function(){

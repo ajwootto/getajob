@@ -5,7 +5,8 @@ block sidebar
 		a(href="#")#side Hobby/School<br/>
 		a(href="#")#life Life <br />
 		a(href="#")#contact Contact <br />
-		a(href="#")#resume Resume
+		a(href="#")#resume Resume <br />
+		a(href="http://github.com/ajwootto")#git Github 
 script 
 	var imageAjax = function (img) {
 		$.ajax({
@@ -44,6 +45,9 @@ script
 			var that = this
 			$(this).bind('click', function() {
 				console.log('clicked')
+				window.scrollTo(0, 0);
+				$("#clickoff").css("width", $(document).width());
+				$("#clickoff").css("height", $(document).height());
 				if ($(that).hasClass('active')) {
 					dontZoom()
 				}
@@ -53,7 +57,7 @@ script
 			})
 		})
 	};
-	$('#sidebar').find("a").each(function() {
+	$('#sidebar').find("a").not("#git").each(function() {
 		$(this).bind('click', function(e) {
 			var that = e.target
 			e.preventDefault();
