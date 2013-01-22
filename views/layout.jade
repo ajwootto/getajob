@@ -13,10 +13,8 @@ script
   $("#clickoff").bind('click', function() {
     dontZoom();
   });
-  $("#zoomHeader").click(function() {
-    dontZoom();
-  });
-  $("#zoomContent").click(function() {
+  $("#zoomContainer").bind('click', function() {
+    console.log('clicked off')
     dontZoom();
   });
   $(window).resize(function() {
