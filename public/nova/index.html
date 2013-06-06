@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="scripts/vendor/jquery.min.js"></script>
+	<script type="text/javascript" src='cordova-2.2.0.js'></script>
+	<script src="scripts/vendor/underscore-min.js"></script>
+	<script src="scripts/vendor/backbone-min.js"></script>
+	<script src="js/compbaconswipe.js"></script>
+	<script type="text/javascript" src="barcodescanner.js"></script>
+	<script type="text/javascript" src="js/iscroll.js"></script>
+	<script src="js/models.js"></script>
+	<script src="js/collections.js"></script>
+	<script src="js/views/header_views.js"></script>
+	<script src="js/views/browsemenu_view.js"></script>
+	<script src="js/views/infoitem_view.js"></script>
+	<script src="js/views/productdetails_view.js"></script>
+	<script src="js/views/reviews_view.js"></script>
+	<script src="js/views/productlist_views.js"></script>
+	<script src="js/views/compare_view.js"></script>
+	<script src="js/views/scan_view.js"></script>
+	<script src="js/views/footer_view.js"></script>
+	<script src="js/views/view_helpers.js"></script>
+
+	<script type="text/javascript">
+		if(!window.localStorage.getItem('store')){
+			window.localStorage.setItem("store", "FutureShopCanada");
+		};
+		window.buttonactive = "#37B559"
+		window.lastCompare = null;
+		window.browsemenus = new browsemenu();
+		window.serverURL = "http://caf-supernova-next.herokuapp.com";
+		window.disableClick = true;
+		window.intervals = [];
+		window.metricTitles = ["Annual Energy Cost", "Equivalent Trees Needed", "Equivalent Litres of Gasoline", "Equivalent Lightbulb Usage (Months)", "Computer Usage (Months)", "Cups of Coffee", "Number of Cars"];
+		window.metricItems = ["operatingCost", "numberOfTreesPlanted", "litresOfGasoline", "lightbulbRuntime", "computerUse", "cupsOfCoffee", "numberOfCars"];
+		window.applianceTypes = ['refrigerator', 'washer', 'dryer', 'dishwasher', 'electricRange', 'television', 'freezer'];
+	</script>
+	<script src="js/routes.js"></script>
+	<link rel="stylesheet" type="text/css" href="template.css">
+	<link rel='stylesheet' type='text/css' href='bars.css'>
+	<script type="text/javascript">
+		$(document).ready( function() {
+			currentView: null
+			var footers = new footer({el: $('#footer')});
+			window.contentroute = new contentroutes($('#body'));
+			window.headerroute = new headerroutes($('#header'));
+			window.infoItemCollection = new infoItemCollection();
+			window.favouritescollection = new favouritesCollection();
+			window.recentscollection = new recentsCollection();
+			window.comparecollection = new compareCollection();
+			window.baselinecollection = new baselineCollection();
+			window.viewArray = new Array();
+			window.topOrigins = [];
+			window.storage = window.localStorage;
+			Backbone.history.start();
+			headerroute.navigate("#browse", {trigger: true}) 
+		});
+	</script>
+	  
+	<!--TEMPLATES-->
+
+	<!--HEADER TEMPLATES-->	  
+	<script type="text/template" id="headerbrowsetemplate">
+		<ul>
+			<li><a href="#" id="browsemenubutton">Browse</a></li>
+			<li><a href="#browse/recents" id="recentsbutton">Recents</a><a href="#browse/favourites" id="favouritesbutton">Favourites</a></li>
+			<li><input id="searchbar" type="search" placeholder="search"></input></li>
+			<li><a href="#" id="settingsbutton"><span data-icon='&#x27;'></span></a></li>
+		</ul>
+	</script>
+
+
+	<script type="text/template" id="headerscantemplate">
+		<ul>
+			<li></li>
+			<li><p>Scan</p></li>
+			<li><button type="button" id="infobutton">Info</button></li>
+		</ul>
+	</script>
+
+
+	<script type="text/template" id="headercomparetemplate">
+		<ul>
+			<li></li>
+			<li><p>Compare</p></li>
+			<li></li>
+		</ul>
+	</script>
+
+<!--FOOTER TEMPLATE-->
+	<script type ="text/template" id="footertemplate">
+		<table border="0" cellpadding="0" cellspacing="0">
+			<tr>
+				<td><a href="#scan" id="scanbutton"><span data-icon="&#x22;"></span>&nbsp;&nbsp;Scan</a></td>
+				<td><a href="#browse" id="browsebutton"><span data-icon="&#x21;"></span>&nbsp;&nbsp;Browse</a></td>
+				<td><a href="#compare" id="comparebutton"><span data-icon="&#x23;"></span>&nbsp;&nbsp;Compare</a></td>
+			</tr>
+		</table>
+	</script>
+
+<!--CONTENT BODY TEMPLATES-->
+	<script type="text/template" id="recentsheadertemplate">
+		<div class="contentheaderspacer"></div>
+		<div id = "recentsheader" class = 'contentheader'>
+			<a id="recentsclear" class="contentheaderbutton" href='#'>Clear</a>
+		</div>
+	</script>
+
+	<script type="text/template" id="recentstemplate">
+	</script>
+
+	<script type="text/template" id="favouritesheadertemplate">
+	<div class="contentheaderspacer"></div>
+	<div id = "favheader" class = 'contentheader'>
+		<a id="favclear" class="contentheaderbutton" href='#'>Clear</a>
+		<div class="comparetabs">
+			<a class="contentheaderbutton tab" id="washer" href="#'">Washers</a>
+			<a class="contentheaderbutton tab" id="dryer" href="#">Dryers</a>
+			<a class="contentheaderbutton tab" id="refrigerator" href="#" >Fridges</a>
+			<a class="contentheaderbutton tab" id="electricRange" href="#" >Ovens</a>
+			<a class="contentheaderbutton tab" id="television" href="#" >TVs</a>
+			<a class="contentheaderbutton tab" id="freezer" href="#" >Freezers</a>
+			<a class="contentheaderbutton tab" id="dishwasher" href="#" >Dishwashers</a>
+		</div>
+		<a id="favedit" class="contentheaderbutton" href='#'>Edit</a>
+	</div>
+	</script>
+
+	<script type="text/template" id="favouritestemplate">
+	</script>
+
+	  <!--Browse products from selected category screen-->
+	<script type="text/template" id="browseheadertemplate">
+		<div class="contentheaderspacer"></div>
+		<div id = "browseheader" class = 'contentheader'>
+			<a id="browsesort" class="contentheaderbutton" href='#'>Sort</a>
+		</div>
+		<div id="sortmenu">
+			<ul>
+				<li><a id="name" href="#">By Name (A-Z)</a></li>
+				<li><a id="name" class="reverse" href="#">By Name (Z-A)</a></li>
+				<li><a id="salePrice" href="#">By Price</a></li>
+				<li><a id="kwh" href="#">By Energy Rating (Low - High)</a></li>
+				<li><a id="kwh" class="reverse" href="#">By Energy Rating (High - Low)</a></li>
+			</ul>
+		</div>
+	</script>
+
+	<script type="text/template" id="browseselectedtemplate">
+	</script>
+
+	<!--Template for a single product item (used in lists on recents, browse and favourites)-->
+	<script type="text/template" id="browseinfotemplate">
+		<div id="browseinfocontainer">
+			<a id="selectcomparebutton" href="#"><div id="scwrapper"><span id="scfont" data-icon="&#x2c;"></span></div></a>
+			<a id="productlink" href="#test">
+				<div id="productcontainer">
+				  <div id="productpicture">
+				  </div>
+				  <div id="productinfo">
+					<p id="name"></p>
+					<p id="name2"></p>
+					<p id="id" class="info"></p><p id="webid" class="info"></p>
+					<p id="price" class="info"></p>
+				  </div>
+				  <div id="energyprice">
+					  <p id="usage"></p>
+					  <img class="energystar" src="img/energystar.jpg"></img>
+				  </div>
+				</div>
+			</a>
+			<a id="favbutton" href="#"><div id="favwrapper"><span data-icon="&#x25;"></span></div></a>
+		</div>
+	</script>
+
+	<!--Skeleton template for compare screen including baconswipe element and clear button header-->
+	<script type="text/template" id="tabheadertemplate">
+		<div class="contentheaderspacer"></div>
+		<div class="contentheader">
+			<a class="contentheaderbutton" id="compclear" href="#'">Clear</a>
+			<div class="comparetabs">
+				<a class="contentheaderbutton tab" id="washer" href="#'">Washers</a>
+				<a class="contentheaderbutton tab" id="dryer" href="#'">Dryers</a>
+				<a class="contentheaderbutton tab" id="refrigerator" href="#'">Fridges</a>
+				<a class="contentheaderbutton tab" id="electricRange" href="#'">Ovens</a>
+				<a class="contentheaderbutton tab" id="television" href="#'">TVs</a>
+				<a class="contentheaderbutton tab" id="freezer" href="#'">Freezers</a>
+				<a class="contentheaderbutton tab" id="dishwasher" href="#'">Dishwashers</a>
+			</div>
+		</div>
+	</script>
+
+	<script type='text/template' id='collapseRowTemplate'>
+		<div class='collapseRow'><img src="img/arrowright.png"/></div>
+	</script>
+	<script type="text/template" id="comparetemplate">
+		<div id="topCollapseSpacer"></div>
+		<div id='slider' class='swipe'>
+			<ul id="comparelist"
+			></ul>
+		</div>
+		<div id="oldselectcontainer">
+			<div id="oldbackground">
+			</div>
+			<div id="oldselector">
+				<span data-icon="&#x2a;"></span>
+				<h1>Select the year you purchased your current:</h1>
+				<div id="currentappliance">Dishwasher</div>
+				<div id="dateselectcontainer">
+					<label for='dateselector'>Year</label>
+					<select name="dateselector"> 
+						<option value="2009" >2009</option>
+						<option value="2008" >2008</option>
+						<option value="2007" >2007</option>
+						<option value="2006" >2006</option>
+						<option value="2005" >2005</option>
+						<option value="2004" >2004</option>
+						<option value="2003" >2003</option>
+						<option value="2002" >2002</option>
+						<option value="2001" >2001 and Older</option>
+						<!--<option value="2000" >2000</option>
+						<option value="1999" >1999</option>
+						<option value="1998" >1998</option>
+						<option value="1997" >1997</option>
+						<option value="1996" >1996</option>
+						<option value="1995" >1995</option>
+						<option value="1994" >1994</option>
+						<option value="1993" >1993</option>
+						<option value="1992" >1992</option>
+						<option value="1991" >1991</option>
+						<option value="1990" >1990</option>-->
+					</select>
+				</div>
+				<a href="#" id="oldgo">GO!</a>
+				<a href="#" id="oldcancel">I do not currently own this appliance</a>
+			</div>
+		</div>
+	</script>
+
+	<!--Template for top part of compare column with picture, name and price etc.-->
+	<script type="text/template" id="compareitemheadertemplate">
+		<div class="compareitemheader">
+			<a class="removebutton" href="#"><span class="removesymbol" data-icon='&#x2a;'></span></a>
+			<a class="lockbutton" href="#"><span class="locksymbol" data-icon='&#x35;'></span></a>
+			<div id="picture" class="detailslink" href="#"></div>
+			<div id="name" class="detailslink" href="#"></div>
+			<div id='energyprice'>
+				
+				<div id="prices">
+					<div id="price"></div>
+				</div>
+				<div id="energy">
+					<br/>
+				</div>
+			  <img class="energystar" src="img/energystar.jpg"></img>
+			</div>	
+		</div>
+		<div class="infoitemcontainer">
+		</div>
+	</script>
+
+	<!--Template for one row item (trees planted etc.)-->
+	<script type="text/template" id="compareiteminfotemplate">
+		<div class = "infoitem">
+			<div id="infotitle"></div>
+			<div id="infovalue">Unavailable</div>
+		</div>
+	</script>
+
+	<!--Template for browse menu with header-->
+	<script type="text/template" id="browsemenutemplate">
+		<div id="toptriangle"></div>
+		<div id="bottomtriangle"></div>
+	  	<div id="browsemenuheader"><button id="backbutton"> Back </button> <p id="browsetitle"> Appliances</p> <br /></div>
+	</script>
+
+	<!--Product details page template-->
+	<script type='text/template' id='productdetailstemplate'>
+		<div id='productdetailsnavbar' class='contentheader'>
+			<a class='contentheaderbutton' id='productdetailsbackbutton' href='#'>Back</a>
+		</div>
+		<div id='productdetailsmain'>
+			<div id='productdetailsmaincontent'>
+				<div id='productdetailspicturecontainer'>Pickshure go hurr</div>
+				<div id='productdetailstextcontainer'>
+					<div id='productdetailsname'>Generic Appliance Name</div><img class='energystar' src='img/energystar.jpg'></img>
+					<div id='productdetailsinfoleft'>Model No: <span id='productdetailsmodelnumber'>imamodelnumber</span>
+					<br />
+					Web ID: <span id='productdetailssku'>roflimasku</span><br /><br /><br />
+					<label for='quantityselector'>Quantity</label>
+					<select id="quantityselector" name="quanitityselector"> 
+						<option value="1" >1</option>
+						<option value="2" >2</option>
+						<option value="3" >3</option>
+						<option value="4" >4</option>
+						<option value="5" >5</option>
+						<option value="6" >6</option>
+						<option value="7" >7</option>
+						<option value="8" >8</option>
+						<option value="9" >9</option>
+						<option value="10" >10</option>
+						<option value="11" >11</option>
+						<option value="12" >12</option>
+						<option value="13" >13</option>
+						<option value="14" >14</option>
+						<option value="15" >15</option>
+						<option value="16" >16</option>
+						<option value="17" >17</option>
+						<option value="18" >18</option>
+						<option value="19" >19</option>
+						<option value="20" >20</option>
+						<option value="21" >21</option>
+						<option value="22" >22</option>
+						<option value="23" >23</option>
+						<option value="24" >24</option>
+						<option value="25" >25</option>
+					</select>
+					</div>
+					<div id='productdetailsinforight'><span id='productdetailskwh'>666</span><br><span style='font-size:.8em;' class='prices' id='productdetailsprice'>$666</span><span style='font-size:.8em;' class='prices' id='productdetailssaleprice'>$666</span><span style='font-size:.8em;' class='prices' id='productdetailslifetime'>$666</span></div>
+				</div>
+			</div>
+			<div id="bigbuttons">
+				<img src="img/detailsgradient.png"></img>
+				<a class='productdetailsmainbutton' id='productdetailscompare' href='#'><span id='productdetailscompareicon' data-icon='&#x2c;'style='font-size:.8em'></span> Compare</a>
+				<a class='productdetailsmainbutton' id='productdetailsfavourite' href='#'><span id='productdetailsfavouriteicon' data-icon='&#x25;'></span> Favourite</a>
+				<a class='productdetailsmainbutton' id='productdetailsreviews' href='#'><span data-icon='&#x31;'style='font-size:.8em'></span> Reviews</a>
+
+			</div>
+		</div>
+		<div id='slider'>
+			<ul id="slidelist"></ul>
+		</div>
+	</script>
+
+	<!--Template for grid item for product details page-->
+	<script type='text/template' id='productdetailsgriditemtemplate'>
+		<div id='griditemtitle'>lolimatitle</div><div id='griditemvalue'>Unavailable</div><select name='griditemdropdown'><option value="0.083">Monthly</option><option selected="selected" value='1'>Annually</option><option value='13'>Lifetime</option></select><br/><br/>
+	</script>
+	<script type='text/template' id='metricbartemplate'>
+		<div class="metricbarcontainer">
+			<span></span>
+			<img class="iconoverlay"/>
+			<div class="averageText">Avg.</div>
+
+			<div id="staticBox">
+				<div id="bar"></div>
+			</div>
+			<div class="result"></div>
+			<div class="averageNum">Average: </div>
+		</div>
+	</script>
+
+
+	<script type="text/template" id="reviewsheadertemplate">
+		<div class="contentheaderspacer"></div>
+		<div id = "reviewssheader" class = 'contentheader'>
+			<a class='contentheaderbutton' id='productdetailsbackbutton' href='#'>Back</a>
+			<div class="averagereviewstars">
+			Average Score
+				<span id="1" data-icon='&#x25;'/><span id="2" data-icon='&#x25;'/><span id="3" data-icon='&#x25;'/><span id="4" data-icon='&#x25;'/><span id="5" data-icon='&#x25;'/>
+			</div>
+	 	</div>
+	</script>
+
+	<script type="text/template" id="reviewviewtemplate">
+	</script>
+
+	<script type="text/template" id="reviewitemtemplate">
+		<div id="review" class="reviewitemcontainer">
+		<p class='header'>ffff</p>
+			<div class="reviewstars">
+				<span id="1" data-icon='&#x25;'/><span id="2" data-icon='&#x25;'/><span id="3" data-icon='&#x25;'/><span id="4" data-icon='&#x25;'/><span id="5" data-icon='&#x25;'/>
+				<div class='date'>ff</div>
+			</div>
+			<br/><br/><br/><br/>
+			<div class="content">fff</div>
+			<div class="expandtext">touch review to expand</div>
+		</div>
+	</script>
+
+
+	</head>
+
+	<!--Div elements used to slot templates into as well as loading messages hidden/shown-->
+	<body>
+		<div id="header"></div>
+		<div id="infowindowcontainer">
+		   <div id="infowindowbackground"></div>
+		   <div id="infowindow">
+		   		<p>Store Database Selection:</p>
+				<div id="storeselector">
+						<a href="#" id="storeselectorbutton">FS</a>
+				</div>
+				<h2>App Info</h2>
+				<ul>
+					<li>The baseline for comparison of metric data is the averages from 2009 NRCan data</li>
+					<li></li>
+				</ul>
+		   		<h2>Scanning Tips</h2>
+			   	<ul>
+			   		<li>-Align the barcode so the edges are at least touching the edge of the guide box</li>
+			   		<li>-Tap the barcode on the screen to focus the camera</li>
+			   		<li>-Try to keep the tablet steady</li>
+			   	</ul>
+		   </div>
+		</div>
+
+		<div id="browsetriangle" class="browsemenustuff"></div>
+		<div id="browsemenu" class="browsemenustuff"></div>
+		<div id="body" class="contentcontainer"></div>
+		<div id='contentloadingmessage'>
+			<p>LOADING</p></div>
+		<div id="loadingmessage">LOADING</div>
+		<div id="footer"></div>
+	</body>
+</html>

@@ -1,0 +1,110 @@
+
+
+.metricbarcontainer {
+	width: 100%;
+	position: relative;
+}
+
+
+.metricbarcontainer .title {
+	text-align: center;
+	margin:0 auto 0.5em auto;
+	display: relative;
+}
+
+.metricbarcontainer .averageText {
+	font-size: 10pt;
+	display:inline-block;
+	border-bottom: 2px solid grey;
+	border-right: 2px solid grey;
+	padding-left:100px;
+	padding-right: 5px;
+	/*top: 45%;
+	left:30%;*/
+	position: absolute;
+}
+.averageText {
+	top: 80px;
+	left:40%;
+}
+#compareview .averageText {
+	top: 68px;
+}
+
+.metricbarcontainer .averageNum {
+	font-size: 14pt;
+	padding-left: 0;
+	position: absolute;
+	color: #676767;
+	width:100%;
+	text-align: center;
+	bottom: -50px;
+}
+#compareview .averageNum {
+	display: none;
+}
+
+#compareview #staticBox {
+}
+.metricbarcontainer #staticBox {
+	height:130px;
+	width: 8em;
+	border: 1px solid #000;
+	margin: auto;
+	padding-top: 20px;
+	background-color: #cdcbcc;
+
+	/*box-shadow: 0px 0px 10px 2px grey;*/
+}
+#productdetails #staticBox {
+	width: 6em;
+	height: 160px;
+
+}
+
+.metricbarcontainer #bar {
+	height: auto;
+	width: 8em;
+	background-color: #4CBB17;
+	margin-top: 5em;
+	/*-webkit-transition: margin-top 1s ease, height 1s ease;*/
+}
+#productdetails .metricbarcontainer #bar {
+	width:6em;
+}
+
+.metricbarcontainer .result {
+	font-size: 20pt;
+	width:100%;
+	text-align: center;
+	bottom: -30px;
+	position:absolute;
+	color: #676767;
+	font-weight:700;
+}
+#productdetails .result {
+	bottom: -20px;
+}
+
+.metricbarcontainer img {
+	position: absolute;
+	/*margin-top: 10px;
+	margin-left: 25px;
+	height: 150px;
+	width: 210px;*/
+}
+#compareview .metricbarcontainer img {
+	width: 258px;
+}
+#productdetails .metricbarcontainer img {
+	width:250px;
+	left:2px;
+}
+#compareview .metricbarcontainer span{
+	border-right: 1px solid #adadad;
+	height:200px;
+	width:0px;
+	right: 0;
+	position:absolute;
+	z-index: 10;
+}
